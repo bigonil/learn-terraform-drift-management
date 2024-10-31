@@ -3,6 +3,7 @@
 
 provider "aws" {
   region = var.region
+  profile = "lb-aws-admin"
 }
 
 data "aws_ami" "ubuntu" {
@@ -60,4 +61,14 @@ resource "aws_security_group" "sg_ssh" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+resource "aws_security_group_rule" "sg_web" {
+  type      = "ingress"
+  to_port   = "8080"
+  from_port = "8080"
+  protocol  = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg_web.id
+}
+
 }
