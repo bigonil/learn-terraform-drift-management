@@ -1,16 +1,6 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 3.24.1"
-    }
-  }
-  required_version = ">= 0.15"
-}
-
 provider "aws" {
   region = var.region
 }
@@ -61,7 +51,7 @@ resource "aws_security_group" "sg_ssh" {
     from_port   = "22"
     to_port     = "22"
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.168.1.0/24"] # Replace with your specific IP range
   }
   // connectivity to ubuntu mirrors is required to run `apt-get update` and `apt-get install apache2`
   egress {
