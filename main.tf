@@ -61,6 +61,7 @@ resource "aws_security_group" "sg_ssh" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
 
 resource "aws_security_group_rule" "sg_web" {
   type      = "ingress"
@@ -70,5 +71,4 @@ resource "aws_security_group_rule" "sg_web" {
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id = aws_security_group.sg_web.id
 }
-
-}
+resource "aws_security_group" "sg_web"{}
